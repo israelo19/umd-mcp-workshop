@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "umd-survival": {
+      "command": "python",
+      "args": [
+        "/FULL/PATH/TO/umd-mcp-workshop/server.py"
+      ]
+    }
+  }
+}
