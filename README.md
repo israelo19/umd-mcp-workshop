@@ -19,8 +19,7 @@ Follow along live, or set it up at home after the session.
 
 ## Option A — Follow along in Google Colab (no setup needed)
 
-**[Open in Colab →](https://colab.research.google.com)**  
-*(Replace this link with your actual Colab link before the workshop)*
+**[Open in Colab →](https://colab.research.google.com/drive/1ApsWqYtaFPER_Oo62AzTNrLL7WpERyKL)**  
 
 Just open it, click **Runtime → Run all**, and you're good.
 
