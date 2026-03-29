@@ -98,10 +98,86 @@ That's the whole protocol. Everything else is just Python.
 
 ---
 
+## Option C — Build your own MCP server and add it to Claude Code
+
+Want to go further? Here's how to create a brand new server and connect it to Claude Code (the CLI).
+
+### Prerequisites
+- Claude Code installed: `npm install -g @anthropic-ai/claude-code`
+- Python 3.10+
+
+### Steps
+
+**1. Create a new project folder**
+```bash
+mkdir my-mcp-server
+cd my-mcp-server
+```
+
+**2. Install the MCP library**
+```bash
+pip install mcp
+```
+
+**3. Write your server** — create `server.py`:
+```python
+from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("my-server")
+
+@mcp.tool()
+def hello(name: str) -> str:
+    """Say hello to someone."""
+    return f"Hello, {name}!"
+
+mcp.run()
+```
+
+**4. Add the server to Claude Code**
+
+Run this command from anywhere (replace the path with your actual path):
+```bash
+claude mcp add my-server python /FULL/PATH/TO/my-mcp-server/server.py
+```
+
+To use a virtual environment's Python:
+```bash
+claude mcp add my-server /path/to/venv/bin/python /FULL/PATH/TO/server.py
+```
+
+**5. Verify it was added**
+```bash
+claude mcp list
+```
+
+**6. Test it in Claude Code**
+```bash
+claude
+```
+Then ask Claude to use your tool. You can also run `claude mcp get my-server` to inspect the config.
+
+### Other useful `claude mcp` commands
+
+| Command | What it does |
+|---------|--------------|
+| `claude mcp add <name> <cmd> [args...]` | Register a new server |
+| `claude mcp list` | List all registered servers |
+| `claude mcp get <name>` | Show details for one server |
+| `claude mcp remove <name>` | Remove a server |
+
+> **Scopes:** By default, servers are saved to your current project (`.claude/settings.json`). Add `--scope user` to make a server available across all your projects.
+
+```bash
+claude mcp add --scope user my-server python /FULL/PATH/TO/server.py
+```
+
+---
+
 ## Resources
 - [MCP Docs](https://modelcontextprotocol.io)
 - [FastMCP on PyPI](https://pypi.org/project/mcp/)
 - [Claude Desktop Download](https://claude.ai/download)
+- [Claude Code Docs](https://docs.anthropic.com/en/docs/claude-code)
 - [CBC Discord](#) ← add your Discord link
 
 ## Built by
